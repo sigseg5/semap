@@ -1,0 +1,9 @@
+[Unit]
+Description=semap systemd service.
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/semap
+
+[Install]
+WantedBy=multi-user.target
