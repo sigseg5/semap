@@ -1,7 +1,3 @@
-pub fn help() {
-    println!("Usage…")
-}
-
 pub fn get_devices() -> Vec<(u16, u16)> {
     let mut devices = Vec::new();
     for device in rusb::devices().unwrap().iter() {
