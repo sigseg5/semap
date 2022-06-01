@@ -4,10 +4,6 @@ use std::time::Duration;
 mod cli;
 mod dconf;
 
-// TODO: Parse kb_fingerprint from argv (may be compile time?)
-// TODO: Read remap scheme from argv?
-// TODO: Add systemd intergration?
-
 fn main() {
     let kb_fingerprint: (u16, u16) = (5050, 0024);
     let default_settings = "['caps:ctrl_modifier', 'compose:ralt', 'lv3:menu_switch']";
