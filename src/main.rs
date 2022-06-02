@@ -5,6 +5,8 @@ mod cli;
 mod dconf;
 
 fn main() {
+    cli::check_platform();
+
     let kb_fingerprint: (u16, u16) = (5050, 0024);
     let default_settings = "['caps:ctrl_modifier', 'compose:ralt', 'lv3:menu_switch']";
     let xkb_opt = "/org/gnome/desktop/input-sources/xkb-options";
