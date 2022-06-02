@@ -13,7 +13,7 @@ pub fn check_platform() {
     if cfg!(windows) {
         println!("Windows is not supported right now. And it won't be.");
         exit(1);
-    } else if cfg!(macos) {
+    } else if cfg!(target_os = "macos") {
         println!("macOS is not yet supported.");
         exit(1);
     }
