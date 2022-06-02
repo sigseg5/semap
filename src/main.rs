@@ -14,8 +14,8 @@ fn main() {
         "['compose:ralt', 'lv3:menu_switch', 'caps:ctrl_modifier', 'altwin:swap_alt_win']";
 
     loop {
-        for i in cli::get_devices().iter() {
-            if i == &kb_fingerprint {
+        for i in cli::get_devices() {
+            if i == kb_fingerprint {
                 if dconf::get(xkb_opt).unwrap() == model_m_settings {
                     break;
                 };

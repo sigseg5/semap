@@ -1,11 +1,13 @@
 use std::process::exit;
 
 pub fn get_devices() -> Vec<(u16, u16)> {
-    let mut devices = Vec::new();
-    for device in rusb::devices().unwrap().iter() {
-        let dev = device.device_descriptor().unwrap();
-        devices.push((dev.vendor_id(), dev.product_id()));
-    }
+    let mut devices = Vec::with_capacity(2);
+    rusb::devices().unwrap().iter().for_each(|device| {
+        devices.push((
+            device.device_descriptor().unwrap().vendor_id(),
+            device.device_descriptor().unwrap().product_id(),
+        ));
+    });
     devices
 }
 
