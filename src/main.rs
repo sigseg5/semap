@@ -26,11 +26,11 @@ fn main() {
             thread::sleep(five_secs);
             let after_connect_devices = cli::get_devices();
             let mut difference = vec![];
-            for i in after_connect_devices {
-                if !pre_connect_devices.contains(&i) {
-                    difference.push(i);
+            after_connect_devices.iter().for_each(|i| {
+                if !pre_connect_devices.contains(i) {
+                    difference.push(&*i);
                 }
-            }
+            });
             println!(
                 "You fingerprint is {:#X?}\n
                 Put this data to 50 line in main.rs, after that rebuild and reinstall service.\n
