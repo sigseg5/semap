@@ -2,18 +2,26 @@
 
 This is a dynamic dconf layout switcher for my IBM Model M. Tested at Fedora 36.
 
-# Todo
-
-I haven't any time for this, so, if you want to use `semap` recompile this app with your params.
-
-* Parse keyboard vendor_id and priduct_id from argv;
-* Parse dconf config string from argv.
-
 # Dependencies
 
 * systemd;
 * GNOME DE;
 * cargo.
+
+# Get your fingerprint data
+
+* Run app with `cargo run -- --find-dev` command;
+* You'l get something like that:
+```
+You fingerprint is [
+    (
+        0x13BA,
+        0x18,
+    ),
+]
+```
+
+* Put this values to 50 line in main.rs, after that rebuild and reinstall service (from Installation section).
 
 # Installation
 
