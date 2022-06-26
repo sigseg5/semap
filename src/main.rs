@@ -26,11 +26,11 @@ fn main() {
             thread::sleep(five_secs);
             let after_connect_devices = cli::get_devices();
             let mut difference = vec![];
-            for i in after_connect_devices {
-                if !pre_connect_devices.contains(&i) {
-                    difference.push(i);
+            after_connect_devices.iter().for_each(|i| {
+                if !pre_connect_devices.contains(i) {
+                    difference.push(&*i);
                 }
-            }
+            });
             println!(
                 "You fingerprint is {:#X?}\n
                 Put this data to 50 line in main.rs, after that rebuild and reinstall service.\n
@@ -50,16 +50,21 @@ fn main() {
     loop {
         for i in cli::get_devices() {
             if i == kb_fingerprint {
-                if dconf::get(xkb_opt).unwrap() == model_m_settings {
+                if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
+                    == model_m_settings
+                {
                     break;
                 };
-                dconf::set(xkb_opt, model_m_settings).unwrap();
+                dconf::set(xkb_opt, model_m_settings).expect("Can't set xkb-options for Model M.");
                 break;
             } else {
-                if dconf::get(xkb_opt).unwrap() == default_settings {
+                if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
+                    == default_settings
+                {
                     break;
                 } else {
-                    dconf::set(xkb_opt, default_settings).unwrap();
+                    dconf::set(xkb_opt, default_settings)
+                        .expect("Can't set xkb-options for standart keyboard.");
                     break;
                 }
             }
