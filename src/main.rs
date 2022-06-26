@@ -50,16 +50,21 @@ fn main() {
     loop {
         for i in cli::get_devices() {
             if i == kb_fingerprint {
-                if dconf::get(xkb_opt).unwrap() == model_m_settings {
+                if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
+                    == model_m_settings
+                {
                     break;
                 };
-                dconf::set(xkb_opt, model_m_settings).unwrap();
+                dconf::set(xkb_opt, model_m_settings).expect("Can't set xkb-options for Model M.");
                 break;
             } else {
-                if dconf::get(xkb_opt).unwrap() == default_settings {
+                if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
+                    == default_settings
+                {
                     break;
                 } else {
-                    dconf::set(xkb_opt, default_settings).unwrap();
+                    dconf::set(xkb_opt, default_settings)
+                        .expect("Can't set xkb-options for standart keyboard.");
                     break;
                 }
             }
