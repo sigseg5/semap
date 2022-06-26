@@ -27,6 +27,11 @@ You fingerprint is [
 
 * Run `bash build.sh` and `sudo bash install.sh` to build app and install `systemd` service.
 
+# Upgrading
+
+* Run `sudo bash uninstall.sh`
+* Continue normal installation
+
 # Uninstall
 
 * Run `sudo bash uninstall.sh`
