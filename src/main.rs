@@ -24,6 +24,7 @@ fn main() {
             let pre_connect_devices = cli::get_devices();
             println!("Now connect your Model M (you have 5 sec)…");
             thread::sleep(five_secs);
+            
             let after_connect_devices = cli::get_devices();
             let mut difference = vec![];
             after_connect_devices.iter().for_each(|i| {
@@ -48,27 +49,22 @@ fn main() {
         "['compose:ralt', 'lv3:menu_switch', 'caps:ctrl_modifier', 'altwin:swap_alt_win']";
 
     loop {
-        for i in cli::get_devices() {
-            if i == kb_fingerprint {
+        cli::get_devices().into_iter().for_each(|dev| {
+            if dev == kb_fingerprint {
                 if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
-                    == model_m_settings
+                    != model_m_settings
                 {
-                    break;
+                    dconf::set(xkb_opt, model_m_settings).expect("Can't set xkb-options for Model M.");
                 };
-                dconf::set(xkb_opt, model_m_settings).expect("Can't set xkb-options for Model M.");
-                break;
             } else {
                 if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
-                    == default_settings
+                    != default_settings
                 {
-                    break;
-                } else {
                     dconf::set(xkb_opt, default_settings)
-                        .expect("Can't set xkb-options for standart keyboard.");
-                    break;
+                    .expect("Can't set xkb-options for standart keyboard.");
                 }
             }
-        }
+        });
         thread::sleep(Duration::from_secs(5))
     }
 }
