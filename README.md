@@ -10,7 +10,7 @@ This is a dynamic dconf layout switcher for my IBM Model M. Tested at Fedora 36.
 
 # Get your fingerprint data
 
-* Run app with `cargo run -- --find-dev` command;
+* Run app with `cargo run -- --find` command;
 * You'l get something like that:
 ```
 You fingerprint is [
@@ -21,7 +21,7 @@ You fingerprint is [
 ]
 ```
 
-* Put this values to 50 line in main.rs, after that rebuild and reinstall service (from Installation section).
+* Put this values to 30 line in main.rs, after that rebuild and reinstall service (from Installation section).
 
 # Installation
 
