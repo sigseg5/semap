@@ -3,6 +3,7 @@
 use std::process::Command;
 use std::process::Output;
 
+#[doc = "This function can set any `value` for dconf `key`."]
 pub fn set(key: &str, value: &str) -> Result<(), String> {
     let mut cmd = Command::new("dconf");
     cmd.args(&["write", key, value]);
@@ -12,6 +13,7 @@ pub fn set(key: &str, value: &str) -> Result<(), String> {
     }
 }
 
+#[doc = "This function can read value for any dconf `key`."]
 pub fn get(key: &str) -> Result<String, String> {
     let mut cmd = Command::new("dconf");
     cmd.args(&["read", key]);
@@ -21,6 +23,7 @@ pub fn get(key: &str) -> Result<String, String> {
     }
 }
 
+#[doc = "This function makes some output formatting operations (like replacing escape codes)."]
 fn get_stdout(output: Output) -> String {
     let vs = output.stdout;
     String::from_utf8(vs)

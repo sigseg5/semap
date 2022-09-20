@@ -1,6 +1,7 @@
 use std::process::exit;
 use std::{thread, time};
 
+#[doc = "This function returns the `vendor_id` and `product_id` of the each usb device."]
 pub(crate) fn get_devices() -> Vec<(u16, u16)> {
     let mut devices = Vec::with_capacity(2);
     rusb::devices().unwrap().iter().for_each(|device| {
@@ -12,6 +13,7 @@ pub(crate) fn get_devices() -> Vec<(u16, u16)> {
     devices
 }
 
+#[doc = "This function exit with `1` status code if OS is not supported. Only GNU/Linux systems are supported now."]
 pub fn check_platform() {
     if !cfg!(target_os = "linux") {
         println!("Only GNU/Linux systems are supported now.");
@@ -19,7 +21,7 @@ pub fn check_platform() {
     }
 }
 
-#[doc = "This function helps to dynamically determine keyboard's fingerprint. Exit with 0 code."]
+#[doc = "This function helps to dynamically determine keyboard's fingerprint."]
 pub fn find_device() {
     println!("Disconnect your Model M now (you have 5 sec)…");
     let five_secs = time::Duration::from_secs(5);
