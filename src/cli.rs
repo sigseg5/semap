@@ -20,7 +20,7 @@ pub fn check_platform() {
     }
 }
 
-// TODO: Add doc
+#[doc = "This function helps to dynamically determine keyboard's fingerprint. Exit with 0 code."]
 pub fn find_device() {
     println!("Disconnect your Model M now (you have 5 sec)…");
     let five_secs = time::Duration::from_secs(5);
