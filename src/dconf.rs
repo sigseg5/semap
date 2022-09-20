@@ -25,8 +25,8 @@ pub fn get(key: &str) -> Result<String, String> {
 
 #[doc = "This function makes some output formatting operations (like replacing escape codes)."]
 fn get_stdout(output: Output) -> String {
-    let vs = output.stdout;
-    String::from_utf8(vs)
+    let out = output.stdout;
+    String::from_utf8(out)
         .unwrap()
         .replace("\'", "")
         .replace("\n", "")

@@ -24,11 +24,11 @@ pub fn check_platform() {
 #[doc = "This function helps to dynamically determine keyboard's fingerprint."]
 pub fn find_device() {
     println!("Disconnect your Model M now (you have 5 sec)…");
-    let five_secs = time::Duration::from_secs(5);
-    thread::sleep(five_secs);
+    let timeout = time::Duration::from_secs(5);
+    thread::sleep(timeout);
     let pre_connect_devices = get_devices();
     println!("Now connect your Model M (you have 5 sec)…");
-    thread::sleep(five_secs);
+    thread::sleep(timeout);
     let after_connect_devices = get_devices();
     let mut difference = vec![];
     after_connect_devices.iter().for_each(|i| {
@@ -36,11 +36,16 @@ pub fn find_device() {
             difference.push(&*i);
         }
     });
-    println!(
-        "You fingerprint is {:#X?}\n
+    if difference.is_empty() {
+        println!(
+            "The devices are not connected. Make sure you connect your Model M following by tips."
+        );
+    } else {
+        println!(
+            "You fingerprint is {:#X?}\n
                 Put this data to 30 line in main.rs, after that rebuild and reinstall service.\n
                 Data format: (0xYYYY, 0xYYYY), replace all y's with fingerprint.",
-        difference
-    );
-    exit(0);
+            difference
+        );
+    }
 }

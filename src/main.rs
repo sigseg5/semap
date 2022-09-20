@@ -1,4 +1,5 @@
 use clap::{App, Arg};
+use std::process::exit;
 use std::thread;
 use std::time::Duration;
 
@@ -24,6 +25,7 @@ fn main() {
 
     if matches.is_present("find") {
         cli::find_device();
+        exit(0);
     }
 
     // Pass your keyboard fingerprint here
