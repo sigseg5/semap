@@ -36,7 +36,7 @@ pub fn find_device() {
     });
     println!(
         "You fingerprint is {:#X?}\n
-                Put this data to 50 line in main.rs, after that rebuild and reinstall service.\n
+                Put this data to 30 line in main.rs, after that rebuild and reinstall service.\n
                 Data format: (0xYYYY, 0xYYYY), replace all y's with fingerprint.",
         difference
     );
