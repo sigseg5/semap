@@ -13,18 +13,9 @@ fn main() {
         .author("sigseg5")
         .about("Dynamic dconf layout switcher for IBM Model M keyboards.")
         .arg(
-            Arg::new("set")
-                .short('s')
-                .long("set")
-                .takes_value(true)
-                .value_name("SET")
-                .help("Provide valid dconf string for your keyboard.")
-                .required(false),
-        )
-        .arg(
             Arg::new("find")
                 .short('f')
-                .long("find-dev")
+                .long("find")
                 .takes_value(false)
                 .help("This option helps you determine your keyboard fingerprint.")
                 .required(false),
@@ -35,6 +26,7 @@ fn main() {
         cli::find_device();
     }
 
+    // Pass your keyboard fingerprint here
     let kb_fingerprint: (u16, u16) = (0x13BA, 0x18);
     let default_settings = "['caps:ctrl_modifier', 'compose:ralt', 'lv3:menu_switch']";
     let xkb_opt = "/org/gnome/desktop/input-sources/xkb-options";
