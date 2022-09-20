@@ -1,8 +1,7 @@
 use std::process::exit;
 use std::{thread, time};
 
-// TODO: Make private
-pub fn get_devices() -> Vec<(u16, u16)> {
+pub(crate) fn get_devices() -> Vec<(u16, u16)> {
     let mut devices = Vec::with_capacity(2);
     rusb::devices().unwrap().iter().for_each(|device| {
         devices.push((
