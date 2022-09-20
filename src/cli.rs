@@ -13,8 +13,7 @@ pub(crate) fn get_devices() -> Vec<(u16, u16)> {
 }
 
 pub fn check_platform() {
-    // TODO: unix -> linux
-    if !cfg!(unix) {
+    if !cfg!(target_os = "linux") {
         println!("Only GNU/Linux systems are supported now.");
         exit(1);
     }
