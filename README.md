@@ -11,7 +11,7 @@ This is a dynamic dconf layout switcher for IBM Model M keyboards. Tested at Fed
 
 # Get your fingerprint data
 
-* Run app with `cargo run -- --find` command;
+* Run app with `cargo run -- --find`/`cargo run -- -f` command;
 * You'l get something like that:
 ```
 You fingerprint is [
