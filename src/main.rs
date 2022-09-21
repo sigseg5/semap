@@ -10,7 +10,7 @@ fn main() {
     cli::check_platform();
 
     let matches = App::new("semap")
-        .version("0.2.0")
+        .version("0.3.0")
         .author("sigseg5")
         .about("Dynamic dconf layout switcher for IBM Model M keyboards.")
         .arg(
