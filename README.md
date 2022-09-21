@@ -1,12 +1,13 @@
 # semap
 
-This is a dynamic dconf layout switcher for my IBM Model M. Tested at Fedora 36.
+This is a dynamic dconf layout switcher for IBM Model M keyboards. Tested at Fedora 36/Pop!_OS 22.04.
 
 # Dependencies
 
 * systemd;
 * GNOME DE;
-* cargo.
+* dconf
+* cargo (install via `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`).
 
 # Get your fingerprint data
 
@@ -21,7 +22,7 @@ You fingerprint is [
 ]
 ```
 
-* Put this values to 30 line in main.rs, after that rebuild and reinstall service (from Installation section).
+* Put this values to 30 line in main.rs, after that rebuild and reinstall service (from `Installation` section).
 
 # Installation
 
