@@ -1,46 +1,34 @@
-use std::env;
+use clap::{App, Arg};
 use std::process::exit;
+use std::thread;
 use std::time::Duration;
-use std::{thread, time};
 
 mod cli;
 mod dconf;
 
 fn main() {
     cli::check_platform();
-    let args: Vec<String> = env::args().collect();
-    match args.len() {
-        1 => (),
-        _ => {
-            if args[1] != "--find-dev" {
-                println!(
-                    "Can't recognize command, use --find-dev for detect your keyboard fingerprint."
-                );
-                exit(1)
-            }
-            println!("Disconnect your Model M now (you have 5 sec)…");
-            let five_secs = time::Duration::from_secs(5);
-            thread::sleep(five_secs);
-            let pre_connect_devices = cli::get_devices();
-            println!("Now connect your Model M (you have 5 sec)…");
-            thread::sleep(five_secs);
-            let after_connect_devices = cli::get_devices();
-            let mut difference = vec![];
-            after_connect_devices.iter().for_each(|i| {
-                if !pre_connect_devices.contains(i) {
-                    difference.push(&*i);
-                }
-            });
-            println!(
-                "You fingerprint is {:#X?}\n
-                Put this data to 50 line in main.rs, after that rebuild and reinstall service.\n
-                Data format: (0xYYYY, 0xYYYY), replace all y's with fingerprint.",
-                difference
-            );
-            exit(0);
-        }
+
+    let matches = App::new("semap")
+        .version("0.2.0")
+        .author("sigseg5")
+        .about("Dynamic dconf layout switcher for IBM Model M keyboards.")
+        .arg(
+            Arg::new("find")
+                .short('f')
+                .long("find")
+                .takes_value(false)
+                .help("This option helps you determine your keyboard fingerprint.")
+                .required(false),
+        )
+        .get_matches();
+
+    if matches.is_present("find") {
+        cli::find_device();
+        exit(0);
     }
 
+    // Pass your keyboard fingerprint here
     let kb_fingerprint: (u16, u16) = (0x13BA, 0x18);
     let default_settings = "['caps:ctrl_modifier', 'compose:ralt', 'lv3:menu_switch']";
     let xkb_opt = "/org/gnome/desktop/input-sources/xkb-options";
