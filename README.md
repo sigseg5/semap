@@ -24,6 +24,10 @@ You fingerprint is [
 
 * Put this values to 30 line in main.rs, after that rebuild and reinstall service (from `Installation` section).
 
+# Configuration
+
+You can configure layout by pass valid dconf string to 37 line in main.rs
+
 # Installation
 
 * Run `bash build.sh` and `sudo bash install.sh` to build app and install `systemd` service.
