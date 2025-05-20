@@ -2,18 +2,19 @@
 
 This is a dynamic dconf layout switcher for IBM Model M keyboards. Tested at Fedora 36/Pop!_OS 22.04.
 
-# Dependencies
+## Dependencies
 
 * systemd;
 * GNOME DE;
 * dconf
 * cargo (install via `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`).
 
-# Get your fingerprint data
+## Get your fingerprint data
 
 * Run app with `cargo run -- --find`/`cargo run -- -f` command;
 * You'l get something like that:
-```
+
+```text
 You fingerprint is [
     (
         0x13BA,
@@ -24,19 +25,19 @@ You fingerprint is [
 
 * Put this values to 30 line in main.rs, after that rebuild and reinstall service (from `Installation` section).
 
-# Configuration
+## Configuration
 
 You can configure layout by pass valid dconf string to 37 line in main.rs
 
-# Installation
+## Installation
 
 * Run `bash build.sh` and `sudo bash install.sh` to build app and install `systemd` service.
 
-# Upgrading
+## Upgrading
 
 * Run `sudo bash uninstall.sh`
 * Continue normal installation
 
-# Uninstall
+## Uninstall
 
 * Run `sudo bash uninstall.sh`

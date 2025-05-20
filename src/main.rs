@@ -1,4 +1,4 @@
-use clap::{App, Arg};
+use clap::{Command, Arg, ArgAction};
 use std::process::exit;
 use std::thread;
 use std::time::Duration;
@@ -9,7 +9,7 @@ mod dconf;
 fn main() {
     cli::check_platform();
 
-    let matches = App::new("semap")
+    let matches = Command::new("semap")
         .version("0.3.0")
         .author("sigseg5")
         .about("Dynamic dconf layout switcher for IBM Model M keyboards.")
@@ -17,13 +17,12 @@ fn main() {
             Arg::new("find")
                 .short('f')
                 .long("find")
-                .takes_value(false)
                 .help("This option helps you determine your keyboard fingerprint.")
-                .required(false),
+                .action(ArgAction::SetTrue),
         )
         .get_matches();
 
-    if matches.is_present("find") {
+    if matches.get_flag("find") {
         cli::find_device();
         exit(0);
     }
@@ -36,25 +35,19 @@ fn main() {
         "['compose:ralt', 'lv3:menu_switch', 'caps:ctrl_modifier', 'altwin:swap_alt_win']";
 
     loop {
-        for i in cli::get_devices() {
+        if let Some(i) = cli::get_devices().into_iter().next() {
             if i == kb_fingerprint {
                 if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
-                    == model_m_settings
+                    != model_m_settings
                 {
-                    break;
-                };
-                dconf::set(xkb_opt, model_m_settings).expect("Can't set xkb-options for Model M.");
-                break;
-            } else {
-                if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
-                    == default_settings
-                {
-                    break;
-                } else {
-                    dconf::set(xkb_opt, default_settings)
-                        .expect("Can't set xkb-options for standart keyboard.");
-                    break;
+                    dconf::set(xkb_opt, model_m_settings)
+                        .expect("Can't set xkb-options for Model M.");
                 }
+            } else if dconf::get(xkb_opt).expect("Can't get xkb-options from dconf.")
+                != default_settings
+            {
+                dconf::set(xkb_opt, default_settings)
+                    .expect("Can't set xkb-options for standard keyboard.");
             }
         }
         thread::sleep(Duration::from_secs(5))
